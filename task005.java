@@ -4,61 +4,59 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-
 public class task005 {
-    static char [] textGlobal;
-    static List<Integer>signIndexesGlobal;
-    public static void main(String[] args) throws IOException {
+   static char[] textGlobal;
+   static List<Integer> signIndexesGlobal;
 
-        ArrayList<Integer> signIndexes = new ArrayList<>();
-        String text = "5? + 7?=1??";
-        char[] textChar = text.replace(" ", "").toCharArray();
-       
-       
-        for (int i = 0; i < textChar.length; i++) {
-            if (textChar[i] == '+' || textChar[i] == '=') {
-                textChar[i] = '-';
-            }
-            if (textChar[i] == '?') {
-                signIndexes.add(i);
-            }
+   public static void main(String[] args) throws IOException {
 
-        }
-        
-        textGlobal=textChar;
-        signIndexesGlobal=signIndexes;
-        combWithRep(new int [signIndexes.size()], 0, 10);
-       
-    }
+      ArrayList<Integer> signIndexes = new ArrayList<>();
+      String text = "5? + 7?=1??";
+      char[] textChar = text.replace(" ", "").toCharArray();
 
-    
-    public static void combWithRep(int[] comb, int index, int k) {
-        if (index == comb.length) {
-            checkComb(comb);
-            return;
+      for (int i = 0; i < textChar.length; i++) {
+         if (textChar[i] == '+' || textChar[i] == '=') {
+            textChar[i] = '-';
+         }
+         if (textChar[i] == '?') {
+            signIndexes.add(i);
+         }
 
-        }
-        for (int i = 0; i < k; i++) {
-            comb[index] = i;
-            combWithRep(comb, index + 1, k);
-        
-        }
-       
-    }
-    public static void checkComb (int [] comb) {
-            for(int i=0; i<comb.length;i++){
-                textGlobal[signIndexesGlobal.get(i)]=Character.forDigit(comb[i], 10);
-            }
-            String[] number = String.valueOf(textGlobal).split("-");
-            int a = Integer.parseInt(number[0]);
-            int b = Integer.parseInt(number[1]);
-            int c = Integer.parseInt(number[2]);     
-            if (a+b==c){
-                System.err.printf("%d+%d=%d",a,b,c);
-                System.err.println();
-            }
-            
-        }
-       
+      }
+
+      textGlobal = textChar;
+      signIndexesGlobal = signIndexes;
+      combWithRep(new int[signIndexes.size()], 0, 10);
+
+   }
+
+   public static void combWithRep(int[] comb, int index, int k) {
+      if (index == comb.length) {
+         checkComb(comb);
+         return;
+
+      }
+      for (int i = 0; i < k; i++) {
+         comb[index] = i;
+         combWithRep(comb, index + 1, k);
+
+      }
+
+   }
+
+   public static void checkComb(int[] comb) {
+      for (int i = 0; i < comb.length; i++) {
+         textGlobal[signIndexesGlobal.get(i)] = Character.forDigit(comb[i], 10);
+      }
+      String[] number = String.valueOf(textGlobal).split("-");
+      int a = Integer.parseInt(number[0]);
+      int b = Integer.parseInt(number[1]);
+      int c = Integer.parseInt(number[2]);
+      if (a + b == c) {
+         System.err.printf("%d+%d=%d", a, b, c);
+         System.err.println();
+      }
+
+   }
+
 }
